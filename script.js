@@ -31,9 +31,11 @@ function readOperator() {
     console.log("read operator");
     operator = document.querySelector("#operator").value;
     console.log(operator);
+    readNumbers();
 }
 
 function readCheckBox() {
+    console.log("readCheckBox function works");
     checkbox = document.querySelector("#doround").checked;
     console.log(checkbox);
 }
@@ -45,27 +47,34 @@ function readDecimals() {
 }
 
 function calculation() {
-    console.log("calculation");
+    console.log("calculation works");
     if (operator === "add") {
-        result = firstNumber + secondNumber;
+        result = Number(firstNumber + secondNumber);
     }
     else if (operator === "sub") {
-        result = firstNumber - secondNumber;
+        result = Number(firstNumber - secondNumber);
     }
     else if (operator === "mul") {
-        result = firstNumber * secondNumber;
+        result = Number(firstNumber * secondNumber);
     }
     else if (operator === "div") {
-        result = firstNumber / secondNumber;
+        result = Number(firstNumber / secondNumber);
     }
     if (checkbox === true) {
+        readDecimals();
         result = result.toFixed(decimal);
     }
-    showResult();
+    if (checkbox === false) {
+        result = result;
+    }
+    showResult(result);
+    readNumbers();
+    console.log(result);
 }
 
 function showResult() {
     console.log(result);
+    document.querySelector("#firstnumber").value = result;
     let li = document.createElement("li");
     const resultNode = document.createTextNode(result.toString());
     li.appendChild(resultNode);
